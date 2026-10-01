@@ -1,0 +1,927 @@
+/* GENEL AYARLAR */
+*{
+    margin: 0; /* Tarayıcının varsayılan dış boşluklarını sıfırlar */
+    padding: 0; /* Tarayıcının varsayılan iç boşluklarını sıfırlar */
+    box-sizing: border-box; /* Padding ve border'ı eleman genişliğine dahil eder */
+}
+
+html{
+    scroll-behavior: smooth; /* Sayfa içi link geçişlerini yumuşak ve kayarak yapar */
+}
+
+body{
+    font-family: 'Poppins', sans-serif; /* Sayfanın genel yazı tipini belirler */
+    overflow-x: hidden; /* Yatay kaydırma çubuğunun çıkmasını engeller */
+    color: white; /* Sayfadaki genel yazı rengini beyaz yapar */
+    background: linear-gradient(
+        180deg,
+        #020617 0%,
+        #071426 20%,
+        #0f172a 40%,
+        #172554 60%,
+        #312e81 80%,
+        #020617 100%
+    ); /* Sayfa boyunca yukarıdan aşağıya uzanan renk geçişi */
+    background-attachment: fixed; /* Sayfa kaysa bile arka planın sabit kalmasını sağlar */
+}
+
+section{
+    position: relative; /* İçindeki absolute elemanları konumlandırmak için referans olur */
+    overflow: hidden; /* Bölüm dışına taşan efektleri gizler */
+}
+
+section::before{
+    content: ""; /* Sahte elemanın (pseudo-element) ekranda oluşabilmesi için boş içerik tanımlar */
+    position: absolute; /* Parlama efektini bölüm içinde bağımsızca konumlandırır */
+    width: 500px; /* Parlama efektinin genişliğini 500px yapar */
+    height: 500px; /* Parlama efektinin yüksekliğini 500px yapar */
+    border-radius: 50%; /* Tam daire şekli verir */
+    filter: blur(120px); /* Arka planda yumuşak bir ışık parlaması oluşturur */
+    opacity: 0.18; /* Parlamanın görünürlük şeffaflığını ayarlar */
+    z-index: -1; /* Parlamanın içeriklerin arkasında kalmasını sağlar */
+}
+/* CLOUDS */
+.cloud{
+    position: fixed; /* Sayfa kaydırılsa bile ekrana göre konumunu korur */
+    width: 220px; /* Bulut tabanının genişliğini 220px yapar */
+    height: 70px; /* Bulut tabanının yüksekliğini 70px yapar */
+    background: rgba(255, 255, 255, 0.08); /* Hafif şeffaf beyaz bulut gövdesi */
+    border-radius: 50px; /* Kenarları yumuşatarak kapsül şekli verir */
+    z-index: -1; /* Arka planda kalmasını sağlar */
+}
+
+.cloud::before{
+    content: ""; /* Pofuduk tepeyi oluşturmak için boş bir sahte eleman tanımlar */
+    position: absolute; /* Tepe katmanını bulut tabanına göre bağımsızca konumlandırır */
+    width: 90px; /* Tepe dairesinin genişliğini 90px yapar */
+    height: 90px; /* Tepe dairesinin yüksekliğini 90px yapar */
+    background: rgba(255, 255, 255, 0.08); /* Tepe dairesine tabanla uyumlu şeffaf beyaz renk verir */
+    border-radius: 50%; /* Tepe alanını tam bir daire haline getirir */
+    top: -40px; /* Bulutun üstündeki pofuduk tepeyi oluşturur */
+    left: 40px; /* Tepe dairesini bulut tabanının solundan 40px içeriye hizalar */
+}
+
+.cloud1{ top: 10%; animation: cloudMove 45s linear infinite; } /* 1. bulut hızı ve konumu */
+.cloud2{ top: 35%; animation: cloudMove 65s linear infinite; } /* 2. bulut hızı ve konumu */
+.cloud3{ top: 60%; animation: cloudMove 85s linear infinite; } /* 3. bulut hızı ve konumu */
+
+@keyframes cloudMove{
+    from { transform: translateX(-300px); } /* Bulutun ekranın sol dışından başlamasını sağlar */
+    to { transform: translateX(120vw); } /* Bulutun ekranın sağ dışına kadar yürümesini sağlar */
+}
+/* NAVBAR */
+.navbar{
+    position: sticky; /* Sayfa aşağı kaysa da menünün en üstte sabit kalmasını sağlar */
+    top: 0; /* Sayfanın en üst sınırına yapışmasını sağlar */
+    width: 100%; /* Menü çubuğunun ekran genişliğini tamamen kaplamasını sağlar */
+    padding: 20px 8%; /* Menü çubuğunun üst-altına 20px, sağ-soluna ekran genişliğinin %8'i kadar iç boşluk verir */
+    background: rgba(2, 6, 23, 0.9); /* Arka planı %90 opaklığa sahip çok koyu bir lacivert yapar */
+    backdrop-filter: blur(10px); /* Arkasında kalan elemanları bulanıklaştırarak cam efekti verir */
+    display: flex; /* Logo ve menü elemanlarını yan yana dizmek için esnek kutu modelini aktif eder */
+    justify-content: space-between; /* Logoyu sola, menüyü sağa yaslar */
+    align-items: center; /* Logo ve menü elemanlarını dikey eksende birbirine göre ortalar */
+    z-index: 999; /* Menünün her şeyin üstünde durmasını sağlar */
+}
+
+.logo{
+    font-size: 30px; /* Logo yazı boyutunu 30px yapar */
+    font-weight: 700; /* Logoyu kalın (bold) yazı tipine ayarlar */
+    color: #38bdf8; /* Logonun açık mavi rengi */
+}
+
+.menu{
+    display: flex; /* Menü linklerini yan yana dizer */
+    list-style: none; /* Liste noktalarını kaldırır */
+    gap: 35px; /* Menü linkleri arasındaki boşluk */
+}
+
+.menu li{
+    position: relative; /* İçindeki açılır menüyü hizalamak için referans olur */
+}
+
+.menu li a{
+    color: white; /* Menü linklerinin yazı rengini beyaz yapar */
+    text-decoration: none; /* Linklerin alt çizgisini kaldırır */
+    transition: 0.4s; /* Hover renk geçiş yumuşaklığı */
+}
+
+.menu li a:hover{
+    color: #f59e0b; /* Üzerine gelindiğinde turuncu/sarı renk yapar */
+}
+/* DROPDOWN */
+.dropdown{
+    position: relative; /* İçindeki mutlak konumlandırılmış açılır menüye (dropdown-menu) referans alanı oluşturur */
+}
+
+.dropdown-menu{
+    position: absolute; /* Açılır menüyü ana menü ögesine bağımlı ama sayfa akışından bağımsız konumlandırır */
+    top: 100%; /* Ana menünün tam altından başlamasını sağlar */
+    left: 0; /* Açılır menüyü ana menü ögesinin sol kenarı ile aynı hizaya getirir */
+    background: rgba(15, 23, 42, 0.95); /* Açılır menünün arka planını %95 opaklıkta koyu lacivert yapar */
+    list-style: none; /* Alt menü elemanlarının başındaki liste noktalarını kaldırır */
+    padding: 10px 0; /* Açılır menünün üst ve alt kenarlarından 10px iç boşluk bırakır */
+    min-width: 180px; /* Açılır menünün genişliğinin en az 180px olmasını sağlar */
+    border-radius: 12px; /* Açılır menü kutusunun köşelerini 12px yuvarlatır */
+
+    /* Menünün yumuşakça aşağı doğru açılma animasyon başlangıç ayarları */
+    opacity: 0; /* Başlangıçta menüyü tamamen şeffaf (görünmez) yapar */
+    visibility: hidden; /* Menünün gizliyken tıklanmasını veya odaklanılmasını engeller */
+    transform: translateY(10px); /* Menüyü başlangıçta 10px aşağıda tutarak açılırken yukarıdan gelme efekti hazırlığı yapar */
+    transition: 0.3s; /* Menünün görünür hale gelme ve kayma efektinin 0.3 saniyede yumuşakça gerçekleşmesini sağlar */
+    z-index: 999; /* Açılır menünün sayfadaki diğer içeriklerin üstünde görünmesini sağlar */
+}
+.dropdown:hover .dropdown-menu{
+    opacity: 1; /* Fareyle üzerine gelindiğinde açılır menüyü tamamen görünür yapar */
+    visibility: visible; /* Açılır menüyü tıklanabilir ve etkileşime geçilebilir hale getirir */
+    transform: translateY(0); /* Menüyü orijinal konumuna getirerek görünür yapar */
+}
+
+.dropdown-menu li{
+    width: 100%; /* Menü elemanlarının (satırların) açılır menü genişliğini tamamen kaplamasını sağlar */
+    padding: 14px; /* Menü elemanlarının içine her taraftan 14px iç boşluk verir */
+}
+
+.dropdown-menu li a{
+    display: block; /* Linkin tüm satırı kaplamasını sağlar */
+    padding: 12px 20px; /* Link metninin etrafına dikeyde 12px, yatayda 20px tıklanabilir iç boşluk alanı tanımlar */
+    color: white; /* Linklerin yazı rengini beyaz yapar */
+    text-decoration: none; /* Linklerin altındaki varsayılan çizgiyi kaldırır */
+    transition: 0.3s; /* Hover (üzerine gelme) renginin ve arka planının 0.3 saniyede yumuşakça değişmesini sağlar */
+}
+
+.dropdown-menu li a:hover{
+    background: #2563eb; /* Açılır menü elemanlarına hover olunca arka plan mavi olur */
+}
+
+.dropdown:hover .dropdown-menu{
+    display: block; /* Fareyle üzerine gelindiğinde açılır menüyü blok yapıda ekrana yerleştirir (görünürlüğü destekler) */
+}
+/* HERO */
+.hero {
+    min-height: 100vh; /* Giriş alanının ekran yüksekliğinin tamamını kaplamasını sağlar */
+    display: flex; /* İçindeki elemanları hizalamak için esnek kutu modelini aktif eder */
+    flex-direction: column; /* İçindeki elemanların yukarıdan aşağıya sıralanmasını sağlar */
+    justify-content: center; /* İçindeki elemanları dikey eksende tam ortalar */
+    align-items: center; /* İçindeki elemanları yatay eksende tam ortalar */
+    text-align: center; /* İçindeki metinlerin ortalanmasını sağlar */
+    position: relative; /* İçindeki mutlak (absolute) konumlandırılmış elemanlara referans olur */
+    background-size: cover; /* Arka plan resminin alanı tamamen kaplamasını sağlar */
+    background-position: center; /* Arka plan resminin merkeze hizalanmasını sağlar */
+    background-attachment: fixed; /* Scroll yaparken arka plan resmini sabit tutar */
+    padding: 20px; /* İçeriğin kenarlardan 20px iç boşluk bırakmasını sağlar */
+    /* Eski background url satırını tamamen sildik, yerine animasyon bağladık */
+    animation: sliderAnim 12s infinite ease-in-out; /* sliderAnim animasyonunu 12 saniyede bir sonsuz döngüyle çalıştırır */
+}
+
+@keyframes sliderAnim {
+    0%, 100% { 
+        background-image: url('assets/Diyarbakır.jpg'); /* Animasyon başında ve sonunda bu resmi gösterir */
+    }
+    33% { 
+        background-image: url('assets/türkiye.jpg'); /* Animasyonun %33'lük diliminde bu resmi gösterir */
+    }
+    66% { 
+        background-image: url('assets/manzara.jpg'); /* Animasyonun %66'lık diliminde bu resmi gösterir */
+    }
+}
+.hero video{
+    position: absolute; /* Videoyu hero alanına göre bağımsızca konumlandırır */
+    inset: 0; /* Videonun dört bir yandan (üst, sağ, alt, sol) 0 pikselle yayılmasını sağlar */
+    object-fit: cover; /* Videonun oranını bozmadan ekranı tamamen kaplamasını sağlar */
+    z-index: -2; /* Videoyu diğer tüm katmanların en arkasına taşır */
+}
+
+
+.hero-overlay{
+    position: absolute; /* Karartma katmanını hero alanına göre bağımsızca konumlandırır */
+    inset: 0; /* Karartmanın tüm ekranı kaplamasını sağlar */
+    background: rgba(0, 0, 0, 0.55); /* Arka planı %55 siyah karartarak yazıların okunmasını sağlar */
+}
+
+.hero::after{
+    content: ""; /* Sahte elemanın (pseudo-element) ekranda oluşabilmesi için boş içerik tanımlar */
+    position: absolute; /* Parlama efektini hero alanına göre bağımsızca konumlandırır */
+    width: 700px; /* Parlama efektinin genişliğini 700px yapar */
+    height: 700px; /* Parlama efektinin yüksekliğini 700px yapar */
+    background: #38bdf8; /* Parlamanın rengini açık mavi yapar */
+    border-radius: 50%; /* Parlama alanını tam bir daire haline getirir */
+    filter: blur(180px); /* Merkezde büyük mavi bir sis/parlama oluşturur */
+    opacity: 0.2; /* Parlama efektinin görünürlüğünü %20'ye düşürerek hafifletir */
+}
+
+.hero-content{
+    position: relative; /* İçerik kutusunu kendi normal konumuna göre konumlandırır */
+    z-index: 2; /* Yazıların karartma katmanının üstünde kalmasını sağlar */
+    text-align: center; /* İçindeki metinlerin ortalanmasını sağlar */
+    width: 90%; /* İçerik kutusunun genişliğini ekranın %90'ı kadar sınırlar */
+}
+
+.hero-title{
+    font-size: 95px; /* Başlığın yazı boyutunu 95px yapar */
+    font-family: 'Playfair Display', serif; /* Başlığa Playfair Display fontunu uygular */
+}
+
+.hero-text{
+    margin-top: 25px; /* Başlık ile açıklama metni arasına 25px üst boşluk bırakır */
+    font-size: 24px; /* Açıklama metninin yazı boyutunu 24px yapar */
+    line-height: 1.8; /* Satırlar arasındaki mesafeyi açarak okunabilirliği artırır */
+}
+/* SMOKE TEXT */
+.smoke-text{
+    animation: smoke 5s infinite alternate; /* smoke animasyonunu 5 saniyede bir, ileri ve geri (alternate) gidecek şekilde sonsuz döngüyle çalıştırır */
+}
+
+@keyframes smoke{
+    from { 
+        letter-spacing: 2px; /* Animasyon başlarken harfler arasındaki boşluğu 2px yapar */
+        opacity: 0.8; /* Animasyon başlarken metnin görünürlüğünü %80 yapar */
+    }
+    to { 
+        letter-spacing: 14px; /* Animasyon biterken harfler arasındaki boşluğu 14px'e çıkararak yayılma efekti verir */
+        opacity: 1; /* Animasyon biterken metni tamamen görünür (%100) yapar */
+        text-shadow: 0 0 25px white; /* Harfler açılırken etraflarına 25px genişliğinde beyaz bir parlama/duman efekti ekler */
+    }
+}
+/* BUTTONS */
+.hero-buttons{
+    margin-top: 40px; /* Buton grubu ile üstteki eleman arasına 40px boşluk bırakır */
+    display: flex; /* Butonları yan yana dizmek için esnek kutu modelini aktif eder */
+    justify-content: center; /* Butonların yatay eksende ortalanmasını sağlar */
+    gap: 20px; /* Butonların arasına 20px mesafe koyar */
+    flex-wrap: wrap; /* Sığmayan butonların alt satıra geçmesini sağlar */
+}
+
+.btn{
+    padding: 16px 35px; /* Butonun içine dikeyde 16px, yatayda 35px iç boşluk verir */
+    background: #38bdf8; /* Butonun arka plan rengini açık mavi yapar */
+    color: white; /* Buton içindeki yazının rengini beyaz yapar */
+    text-decoration: none; /* Buton bir link ise altındaki varsayılan çizgiyi kaldırır */
+    border-radius: 50px; /* Butonun kenarlarını tamamen yuvarlatarak oval bir görünüm verir */
+    transition: 0.5s; /* Butondaki değişimlerin (hover efekti gibi) 0.5 saniyede yumuşakça gerçekleşmesini sağlar */
+}
+
+.btn:hover{
+    background: #f59e0b; /* Fareyle üzerine gelindiğinde butonun arka planını turuncu/amber rengi yapar */
+    transform: translateY(-8px); /* Butonun üzerine gelince hafifçe yukarı kalkmasını sağlar */
+}
+
+.btn2{
+    background: transparent; /* Butonun arka planını şeffaf yapar */
+    border: 2px solid white; /* İçi şeffaf, çerçeveli buton stili */
+}
+/* FEATURES */
+.features{
+    padding: 120px 8%; /* Özellikler bölümünün üst-altına 120px, sağ-soluna ekran genişliğinin %8'i kadar iç boşluk verir */
+    display: flex; /* Özellik kutularını yan yana dizmek için esnek kutu modelini aktif eder */
+    justify-content: center; /* Özellik kutularını yatay eksende ortalar */
+    gap: 30px; /* Kutuların arasına 30px mesafe koyar */
+    flex-wrap: wrap; /* Ekran daraldığında sığmayan kutuların alt satıra geçmesini sağlar */
+}
+
+.feature-box{
+    width: 320px; /* Her bir özellik kutusunun genişliğini 320px olarak sabitler */
+    background: #0f172a; /* Kutuların arka plan rengini koyu lacivert/siyah yapar */
+    padding: 40px; /* Kutunun içine her taraftan 40px iç boşluk verir */
+    border-radius: 25px; /* Kutunun köşelerini 25px yuvarlatır */
+    text-align: center; /* Kutu içindeki tüm metinleri ortalar */
+    transition: 0.5s; /* Kutudaki animasyon geçişlerinin 0.5 saniyede yumuşakça gerçekleşmesini sağlar */
+}
+
+.feature-box:hover{
+    transform: translateY(-12px); /* Kutuya hover olunca yukarı kayma hareketi verir */
+}
+
+.feature-icon{
+    width: 90px; /* İkon dairesinin genişliğini 90px yapar */
+    height: 90px; /* İkon dairesinin yüksekliğini 90px yapar */
+    background: #38bdf8; /* İkon dairesinin arka plan rengini açık mavi yapar */
+    border-radius: 50%; /* Kare alanı tam bir daire haline getirir */
+    display: flex; /* İkonu ortalamak için esnek kutu modelini aktif eder */
+    justify-content: center; /* İkonu daire içinde yatayda ortalar */
+    align-items: center; /* İkonu dairenin merkezine ortalar */
+    font-size: 40px; /* İkonun (veya emoji/yazının) boyutunu 40px yapar */
+    margin: 0 auto 25px auto; /* İkon dairesini yatayda ortalar ve altına 25px boşluk bırakır */
+}
+
+.feature-box h3{
+    margin-bottom: 20px; /* Başlığın altına 20px dış boşluk bırakır */
+    font-size: 28px; /* Başlığın yazı boyutunu 28px yapar */
+}
+
+.feature-box p{
+    line-height: 1.8; /* Açıklama metninin satır aralığını açarak okunabilirliği artırır */
+}
+/* PARALLAX */
+.parallax{
+    height: 650px; /* Paralaks bölümünün yüksekliğini 650px olarak sabitler */
+    background: url("images/parallax.jpg") center/cover fixed; /* Görseli sabitleyerek kaydırma efekti sunar */
+    display: flex; /* İçindeki içerikleri hizalamak için esnek kutu modelini aktif eder */
+    justify-content: center; /* İçindeki elemanları yatay eksende tam ortalar */
+    align-items: center; /* İçindeki elemanları dikey eksende tam ortalar */
+    position: relative; /* İçindeki mutlak (absolute) konumlandırılmış elemanlara referans olur */
+}
+
+.parallax::before{
+    content: ""; /* Sahte elemanın (pseudo-element) ekranda oluşabilmesi için boş içerik tanımlar */
+    position: absolute; /* Karartma katmanını paralaks alanına göre bağımsızca konumlandırır */
+    inset: 0; /* Karartma katmanının tüm paralaks alanını kaplamasını sağlar */
+    background: rgba(0, 0, 0, 0.5); /* Paralaks resmini karartma katmanı */
+}
+
+.parallax-content{
+    position: relative; /* İçerik kutusunu kendi normal konumuna göre konumlandırır */
+    z-index: 2; /* Yazıların karartma katmanının üstünde (önünde) kalmasını sağlar */
+    text-align: center; /* İçindeki metinlerin ortalanmasını sağlar */
+    width: 90%; /* İçerik kutusunun genişliğini ekranın %90'ı kadar sınırlar */
+}
+
+.parallax-content h2{
+    font-size: 65px; /* Başlığın yazı boyutunu 65px yapar */
+}
+
+.parallax-content p{
+    margin-top: 20px; /* Başlık ile açıklama metni arasına 20px üst boşluk bırakır */
+    font-size: 22px; /* Açıklama metninin yazı boyutunu 22px yapar */
+}
+/* SECTION TITLE */
+.section-title{
+    text-align: center; /* Bölüm başlığının yatayda tam ortalanmasını sağlar */
+    font-size: 50px; /* Başlığın yazı boyutunu 50px yapar */
+    margin-bottom: 70px; /* Başlığın altına 70px dış boşluk bırakarak altındaki içerikten uzaklaştırır */
+} 
+/* CARDS */
+.cards-section{
+    padding: 120px 8%; /* Kartlar bölümünün üst-altına 120px, sağ-soluna %8 iç boşluk verir */
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(30, 41, 59, 0.7)); /* Yukarıdan aşağıya doğru koyulaşan yarı şeffaf bir renk geçişi uygular */
+}
+
+.card-container{
+    display: flex; /* Kartları yan yana dizmek için esnek kutu modelini aktif eder */
+    justify-content: center; /* Kart grubunu yatay eksende ortalar */
+    gap: 40px; /* Kartların arasına 40px mesafe koyar */
+    flex-wrap: wrap; /* Ekran daraldığında sığmayan kartların alt satıra geçmesini sağlar */
+}
+
+.card{
+    width: 320px; /* Kartın genişliğini 320px yapar */
+    height: 430px; /* Kartın yüksekliğini 430px yapar */
+    perspective: 1200px; /* 3D derinlik bakış açısını belirler */
+    border-radius: 25px; /* Kartın köşelerini 25px yuvarlatır */
+    position: relative; /* İçindeki mutlak konumlandırılmış elemanlara ve ::before elemanına referans olur */
+    overflow: hidden; /* Kart alanının dışına taşan parlamaları ve görselleri gizler */
+    /* Kartların üst kısmına kaydırıldığında navbarın altında kalmaması için küçük bir scroll-margin ekledik */
+    scroll-margin-top: 100px; /* Sayfa içi linkle bu karta odaklanıldığında üstten 100px boşluk bırakır */
+}
+
+.card::before{
+    content: ""; /* Parlama efekti oluşturmak için boş bir sahte eleman tanımlar */
+    position: absolute; /* Parlama katmanını kart içinde bağımsızca konumlandırır */
+    top: -100%; /* Başlangıçta parlamayı kartın tamamen üst dışına taşır */
+    left: -100%; /* Başlangıçta parlamayı kartın tamamen sol dışına taşır */
+    width: 200%; /* Parlama alanının genişliğini kartın iki katı yapar */
+    height: 200%; /* Parlama alanının yüksekliğini kartın iki katı yapar */
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent); /* Açılı, yarı şeffaf beyaz bir ışık çizgisi oluşturur */
+    transform: rotate(25deg); /* Parlama şeridini yan yatırır */
+    transition: 0.8s; /* Parlama geçiş hareketinin 0.8 saniye sürmesini sağlar */
+}
+
+.card:hover::before{
+    top: 100%; /* Fareyle üzerine gelindiğinde parlamayı kartın alt dışına taşır */
+    left: 100%; /* Kartın üzerinden beyaz bir ışık parlaması akmasını sağlar */
+}
+
+.card-inner{
+    width: 100%; /* İç konteynerin kart genişliğini tamamen kaplamasını sağlar */
+    height: 100%; /* İç konteynerin kart yüksekliğini tamamen kaplamasını sağlar */
+    border-radius: 25px; /* İç konteynerin köşelerini 25px yuvarlatır */
+    position: relative; /* Ön ve arka yüzlerin konumlandırılması için referans olur */
+    transition: transform 2s ease; /* Dönüş hızı süresi */
+    transform-style: preserve-3d; /* Kartın 3D olarak dönmesini etkinleştirir */
+}
+
+.card:hover .card-inner{
+    transform: rotateY(180deg); /* Üzerine gelince kartı arkasına döndürür */
+}
+
+.card-front,
+.card-back{
+    position: absolute; /* Ön ve arka yüzü kart kutusunun içine üst üste gelecek şekilde konumlandırır */
+    inset: 0; /* Her iki yüzün de kart alanını tamamen kaplamasını sağlar */
+    border-radius: 25px; /* Yüzlerin köşelerini 25px yuvarlatır */
+    backface-visibility: hidden; /* Kart dönerken arka tarafında kalan yüzü gizler */
+    overflow: hidden; /* Yüzlerin dışına taşan içerikleri gizler */
+}
+
+.card-front{
+    display: flex; /* Ön yüzdeki içerikleri hizalamak için esnek kutu modelini aktif eder */
+    justify-content: center; /* Ön yüzdeki başlığı yatayda ortalar */
+    align-items: flex-end; /* Ön yüzdeki başlığı kartın en altına yaslar */
+    padding-bottom: 40px; /* Başlığın kartın alt kenarına yapışmaması için 40px iç boşluk bırakır */
+}
+
+.card-img {
+    width: 100%; /* Resmin ön yüz genişliğini tamamen kaplamasını sağlar */
+    height: 100%; /* Resmin ön yüz yüksekliğini tamamen kaplamasını sağlar */
+    object-fit: cover; /* Resmin oranını bozmadan kart alanına sığdırır */
+    position: absolute; /* Resmi kartın zeminine yerleştirmek için bağımsız konumlandırır */
+    top: 0; /* Resmin üst sınırını sıfırlar */
+    left: 0; /* Resmin sol sınırını sıfırlar */
+    z-index: -1; /* Resmi ön yüzdeki yazıların arkasına taşır */
+    border-radius: inherit; /* Kartın sahip olduğu yuvarlak köşeleri aynen devralır */
+}
+
+.card-title{
+    background: rgba(0, 0, 0, 0.6); /* Kart başlığının arkasına %60 siyah yarı şeffaf bir zemin koyar */
+    padding: 12px 30px; /* Başlık metninin etrafına dikeyde 12px, yatayda 30px iç boşluk verir */
+    border-radius: 50px; /* Başlık arka planını oval hale getirir */
+    font-size: 22px; /* Başlığın yazı boyutunu 22px yapar */
+}
+
+.card-back{
+    background: #0f172a; /* Arka yüzün zemin rengini koyu lacivert yapar */
+    transform: rotateY(180deg); /* Kartın arka yüzünü başlangıçta ters tutar */
+    display: flex; /* Arka yüzdeki içerikleri hizalamak için esnek kutu modelini aktif eder */
+    flex-direction: column; /* İçeriklerin yukarıdan aşağıya sıralanmasını sağlar */
+    justify-content: center; /* İçerikleri dikey eksende ortalar */
+    align-items: center; /* İçerikleri yatay eksende ortalar */
+    text-align: center; /* Arka yüzdeki tüm metinleri ortalar */
+    padding: 30px; /* Arka yüzün kenarlarından 30px iç boşluk bırakır */
+}
+
+.card-back h3{
+    margin-bottom: 20px; /* Arka yüz başlığının altına 20px dış boşluk bırakır */
+}
+
+.card-back p{
+    line-height: 1.8; /* Açıklama metninin satır aralığını açarak okunabilirliği artırır */
+}
+
+.card-btn{
+    margin-top: 25px; /* Butonun üstündeki metinden 25px uzaklaşmasını sağlar */
+    padding: 12px 28px; /* Butonun içine dikeyde 12px, yatayda 28px iç boşluk verir */
+    background: #38bdf8; /* Butonun arka plan rengini açık mavi yapar */
+    color: white; /* Buton metnini beyaz yapar */
+    text-decoration: none; /* Butonun altındaki varsayılan link çizgisini kaldırır */
+    border-radius: 40px; /* Buton kenarlarını yuvarlatarak oval bir görünüm kazandırır */
+}
+
+/* GALLERY */
+.gallery{
+    padding: 120px 8%; /* Galeri bölümünün üst-altına 120px, sağ-soluna ekran genişliğinin %8'i kadar iç boşluk verir */
+    background: linear-gradient(to bottom, rgba(88, 28, 135, 0.35), rgba(15, 23, 42, 0.7)); /* Yukarıdan aşağıya mor tondan koyu laciverte doğru giden yarı şeffaf bir renk geçişi uygular */
+}
+
+.gallery-container{
+    display: flex; /* Galeri kutularını yan yana dizmek için esnek kutu modelini aktif eder */
+    justify-content: center; /* Galeri kutularını yatay eksende ortalar */
+    gap: 30px; /* Galeri kutularının arasına 30px mesafe koyar */
+    flex-wrap: wrap; /* Ekran daraldığında sığmayan kutuların alt satıra geçmesini sağlar */
+}
+
+.gallery-box{
+    width: 350px; /* Her bir galeri kutusunun genişliğini 350px olarak sabitler */
+    height: 260px; /* Her bir galeri kutusunun yüksekliğini 260px olarak sabitler */
+    overflow: hidden; /* Resim büyüdüğünde çerçevenin dışına taşmasını engeller */
+    position: relative; /* İçindeki mutlak (absolute) konumlandırılmış overlay katmanına referans olur */
+    border-radius: 20px; /* Galeri kutularının köşelerini 20px yuvarlatır */
+}
+
+.gallery-box img{
+    width: 100%; /* Resmin galeri kutusunun genişliğini tamamen kaplamasını sağlar */
+    height: 100%; /* Resmin galeri kutusunun yüksekliğini tamamen kaplamasını sağlar */
+    object-fit: cover; /* Resmin oranını bozmadan kutu alanına sığdırır ve kırpar */
+    transition: 0.6s; /* Resimdeki büyüme efektinin 0.6 saniyede yumuşakça gerçekleşmesini sağlar */
+}
+
+.gallery-overlay{
+    position: absolute; /* Karartma katmanını galeri kutusu içinde bağımsızca konumlandırır */
+    inset: 0; /* Karartma katmanının tüm galeri kutusunu kaplamasını sağlar */
+    background: rgba(0, 0, 0, 0.5); /* Arka planı %50 siyah karartarak üstteki içeriğin belirginleşmesini sağlar */
+    display: flex; /* İçindeki ikon veya metni hizalamak için esnek kutu modelini aktif eder */
+    justify-content: center; /* İçindeki elemanı yatay eksende tam ortalar */
+    align-items: center; /* İçindeki elemanı dikey eksende tam ortalar */
+    opacity: 0; /* Başlangıçta gizli tutulan siyah katman */
+    transition: 0.5s; /* Karartma katmanının görünür olma geçişini 0.5 saniyeye yayar */
+    font-size: 40px; /* Karartma katmanı içindeki yazı veya ikon boyutunu 40px yapar */
+}
+
+.gallery-box:hover img{
+    transform: scale(1.2); /* Üzerine gelince resmi büyütür (zoom efekti) */
+}
+
+.gallery-box:hover .gallery-overlay{
+    opacity: 1; /* Üzerine gelince siyah katmanı görünür yapar */
+} 
+/* TOUR SECTION */
+.tour-section{
+    padding: 120px 8%; /* Tur bölümünün üst-altına 120px, sağ-soluna ekran genişliğinin %8'i kadar iç boşluk verir */
+    position: relative; /* İçindeki mutlak (absolute) konumlandırılmış arka plan katmanına referans olur */
+}
+
+.tour-section::before{
+    content: ""; /* Arka plan efekti oluşturmak için boş bir sahte eleman tanımlar */
+    position: absolute; /* Efekt katmanını tur alanına göre bağımsızca konumlandırır */
+    inset: 0; /* Efekt katmanının tüm tur alanını kaplamasını sağlar */
+    background: 
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.18), transparent 40%); /* Arka plan köşelerine hafif renk parlamaları ekler */
+    z-index: -1; /* Efekt katmanını içeriklerin (kartların) arkasına taşır */
+}
+
+.tour-container{
+    display: flex; /* Tur kartlarını yan yana dizmek için esnek kutu modelini aktif eder */
+    justify-content: center; /* Tur kartlarını yatay eksende ortalar */
+    gap: 30px; /* Kartların arasına 30px mesafe koyar */
+    flex-wrap: wrap; /* Ekran daraldığında sığmayan kartların alt satıra geçmesini sağlar */
+}
+
+.tour-card{
+    width: 320px; /* Her bir tur kartının genişliğini 320px olarak sabitler */
+    background: #0f172a; /* Kartların arka plan rengini koyu lacivert yapar */
+    padding: 40px; /* Kartın içine her taraftan 40px iç boşluk verir */
+    border-radius: 25px; /* Kartın köşelerini 25px yuvarlatır */
+    text-align: center; /* Kart içindeki tüm metinleri ortalar */
+    position: relative; /* İçindeki mutlak konumlandırılmış kurdele (tour-top) elemanına referans olur */
+    overflow: hidden; /* Kart alanının dışına taşan kurdele fazlalıklarını gizler */
+}
+
+.tour-top{
+    position: absolute; /* Kurdeleyi kart içinde bağımsızca konumlandırır */
+    top: 20px; /* Kurdelenin üst mesafesini 20px yapar */
+    right: -35px; /* Kurdelenin sağ ucunu kart dışına taşır (eğildiğinde tam oturması için) */
+    background: #f59e0b; /* Kurdelenin arka plan rengini turuncu yapar */
+    padding: 10px 45px; /* Kurdelenin içine dikeyde 10px, yatayda 45px iç boşluk verir */
+    transform: rotate(45deg); /* Kartın sağ üst köşesindeki kurdeleyi eğik yapar */
+    font-size: 12px; /* Kurdele içindeki yazının boyutunu 12px yapar */
+}
+
+.tour-card h3{
+    margin-top: 40px; /* Eğik kurdelenin altında kalmaması için başlığın üstüne 40px boşluk bırakır */
+    font-size: 30px; /* Başlığın yazı boyutunu 30px yapar */
+}
+
+.tour-card p{
+    margin: 20px 0; /* Açıklama metninin üstüne ve altına 20px dış boşluk bırakır */
+}
+
+.tour-card span{
+    font-size: 35px; /* Fiyat bilgisini içeren metnin boyutunu 35px yapar */
+    color: #38bdf8; /* Fiyat metninin rengini açık mavi yapar */
+}
+
+.tour-btn{
+    display: inline-block; /* Butonun satır içi blok olarak davranmasını ve padding değerlerinin düzgün uygulanmasını sağlar */
+    margin-top: 25px; /* Butonun üstündeki elemanla arasına 25px dış boşluk bırakır */
+    padding: 13px 28px; /* Butonun içine dikeyde 13px, yatayda 28px iç boşluk verir */
+    background: #38bdf8; /* Butonun arka plan rengini açık mavi yapar */
+    color: white; /* Buton metnini beyaz yapar */
+    text-decoration: none; /* Butonun altındaki varsayılan link çizgisini kaldırır */
+    border-radius: 40px; /* Buton kenarlarını yuvarlatarak oval bir görünüm kazandırır */
+}
+/* STATS SECTION */
+.stats-section{
+    padding: 120px 8%; /* İstatistik bölümünün üst-altına 120px, sağ-soluna %8 iç boşluk verir */
+    display: flex; /* İstatistik kutularını yan yana dizmek için esnek kutu modelini aktif eder */
+    justify-content: center; /* İstatistik kutularını yatay eksende ortalar */
+    gap: 30px; /* Kutuların arasına 30px mesafe koyar */
+    flex-wrap: wrap; /* Ekran daraldığında sığmayan kutuların alt satıra geçmesini sağlar */
+}
+
+.stat-box{
+    width: 240px; /* Her bir istatistik kutusunun genişliğini 240px olarak sabitler */
+    padding: 40px; /* Kutunun içine her taraftan 40px iç boşluk verir */
+    background: rgba(255, 255, 255, 0.06); /* Kutunun arka planına çok hafif, şeffaf beyaz bir renk verir */
+    backdrop-filter: blur(12px); /* Cam efekti için arkasını bulanıklaştırır */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Kutunun etrafına çok ince ve yarı şeffaf beyaz bir çerçeve ekler */
+    border-radius: 25px; /* Kutunun köşelerini 25px yuvarlatır */
+    text-align: center; /* Kutu içindeki tüm metinleri ortalar */
+    transition: 0.5s; /* Kutudaki tüm animasyon ve hover geçişlerinin 0.5 saniyede yumuşakça gerçekleşmesini sağlar */
+}
+
+.stat-box:hover{
+    transform: translateY(-10px); /* Fareyle üzerine gelindiğinde kutuyu 10px yukarı kaydırır */
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.4); /* Üzerine gelince dışa doğru mavi parlama gölgesi verir */
+}
+
+.stat-box h2{
+    font-size: 55px; /* İstatistik rakamlarının yazı boyutunu 55px yapar */
+    color: #38bdf8; /* İstatistik rakamlarının rengini açık mavi yapar */
+}
+
+.stat-box p{
+    margin-top: 10px; /* Rakam ile altındaki açıklama metni arasına 10px üst boşluk bırakır */
+    font-size: 20px; /* Açıklama metninin yazı boyutunu 20px yapar */
+}
+/* WAVE */
+.wave{
+    line-height: 0; /* Alt alta gelen SVG dalgaları arasındaki boşlukları sıfırlar */
+}
+/* TIMELINE */
+.timeline-section{
+    padding: 120px 8%; /* Zaman çizelgesi bölümünün üst-altına 120px, sağ-soluna %8 iç boşluk verir */
+    position: relative; /* İçindeki mutlak (absolute) konumlandırılmış dikey çizgi ve elemanlara referans olur */
+    scroll-margin-top: 90px; /* Sayfa içi bir linkle buraya tıklandığında, üstten 90px navbar boşluğu bırakır */
+}
+
+.timeline{
+    position: relative; /* İçindeki dikey hat ve noktaların konumlandırılması için referans alan oluşturur */
+    max-width: 800px; /* Zaman çizelgesinin toplam genişliğini en fazla 800px ile sınırlar */
+    margin: auto; /* Zaman çizelgesi alanının sayfada yatay olarak ortalanmasını sağlar */
+}
+
+.timeline::before{
+    content: ""; /* Çizgiyi oluşturmak için boş bir sahte eleman tanımlar */
+    position: absolute; /* Çizgiyi timeline alanı içinde bağımsızca konumlandırır */
+    left: 50%; /* Çizgiyi yatay eksende tam ortalamak için soldan %50 mesafeye taşır */
+    width: 4px; /* Çizginin kalınlığını 4px yapar */
+    height: 100%; /* Çizginin tüm zaman çizelgesi boyunca yukarıdan aşağıya uzanmasını sağlar */
+    background: #38bdf8; /* Çizginin rengini açık mavi yapar */
+    transform: translateX(-50%); /* Zaman çizelgesinin ortasından geçen dikey hattı oluşturur */
+}
+
+.timeline-item{
+    position: relative; /* İçindeki nokta ve içerik kutularının konumlandırılması için referans olur */
+    margin: 60px 0; /* Her bir zaman çizelgesi ögesi arasına alttan ve üstten 60px dış boşluk bırakır */
+}
+
+.timeline-dot{
+    width: 25px; /* Çizgi üzerindeki yuvarlak noktaların genişliğini 25px yapar */
+    height: 25px; /* Yuvarlak noktaların yüksekliğini 25px yapar */
+    background: #38bdf8; /* Noktaların rengini açık mavi yapar */
+    border-radius: 50%; /* Kare alanı tam bir daire (nokta) haline getirir */
+    position: absolute; /* Noktayı dikey çizgi üzerine yerleştirmek için bağımsız konumlandırır */
+    left: 50%; /* Noktayı yatayda tam ortalamak için soldan %50 mesafeye taşır */
+    transform: translateX(-50%); /* Noktanın tam olarak dikey çizginin merkezine oturmasını sağlar */
+    z-index: 2; /* Dikey çizgi üzerindeki yuvarlak noktalar */
+}
+
+.timeline-content{
+    width: 42%; /* İçerik kutularının genişliğini toplam alanın %42'si kadar yapar (böylece sol ve sağa sığarlar) */
+    padding: 30px; /* Kutunun içine her taraftan 30px iç boşluk verir */
+    background: #0f172a; /* Kutuların arka plan rengini koyu lacivert yapar */
+    border-radius: 20px; /* Kutunun köşelerini 20px yuvarlatır */
+    position: relative; /* Kutunun konum kaydırma (left) işlemlerinin yapılabilmesini sağlar */
+    transition: 0.5s; /* Kutunun hover (büyüme) efektinin 0.5 saniyede yumuşakça gerçekleşmesini sağlar */
+}
+
+.timeline-content:hover{
+    transform: scale(1.05); /* Fareyle üzerine gelindiğinde kutuyu %5 oranında büyüterek öne çıkarır */
+}
+
+.timeline-item:nth-child(odd) .timeline-content{
+    left: 0; /* Tek sıradaki kutuları sol tarafa yerleştirir */
+}
+
+.timeline-item:nth-child(even) .timeline-content{
+    left: 58%; /* Çift sıradaki kutuları sağ tarafa yerleştirir */
+}
+/* TESTIMONIALS */
+
+.testimonial-section{
+    padding: 120px 8%; /* Müşteri yorumları bölümünün üst-altına 120px, sağ-soluna %8 iç boşluk verir */
+}
+
+.testimonial-container{
+    display: flex; /* Yorum kartlarını yan yana dizmek için esnek kutu modelini aktif eder */
+    justify-content: center; /* Yorum kartlarını yatay eksende ortalar */
+    gap: 30px; /* Kartların arasına 30px mesafe koyar */
+    flex-wrap: wrap; /* Ekran daraldığında sığmayan kartların alt satıra geçmesini sağlar */
+}
+
+.testimonial-card{
+    width: 320px; /* Her bir yorum kartının genişliğini 320px olarak sabitler */
+    padding: 40px; /* Kartın içine her taraftan 40px iç boşluk verir */
+    background: rgba(255, 255, 255, 0.06); /* Kartın arka planına çok hafif, şeffaf beyaz bir renk verir */
+    backdrop-filter: blur(12px); /* Cam efekti (glassmorphism) oluşturmak için kartın arkasını bulanıklaştırır */
+    border-radius: 25px; /* Kartın köşelerini 25px yuvarlatır */
+    text-align: center; /* Kart içindeki tüm metinleri ortalar */
+    transition: 0.5s; /* Karttaki animasyon ve hover geçişlerinin 0.5 saniyede yumuşakça gerçekleşmesini sağlar */
+}
+
+.testimonial-card:hover{
+    transform: translateY(-12px); /* Fareyle üzerine gelindiğinde kartı 12px yukarı kaydırır */
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.4); /* Kutuya hover olunca turuncu parlama gölgesi ekler */
+}
+
+.testimonial-card p{
+    line-height: 2; /* Yorum metninin satır aralığını iki katına çıkararak okunabilirliği artırır */
+    font-style: italic; /* Yorum metnini eğik (italik) yazı tipine dönüştürür */
+}
+
+.testimonial-card h4{
+    margin-top: 20px; /* İsmin (başlığın) üstündeki yorum metni ile arasına 20px dış boşluk bırakır */
+    color: #38bdf8; /* İsmin rengini açık mavi yapar */
+}
+/* CONTACT */
+.contact-section{
+    padding: 120px 8%; /* İletişim bölümünün üst-altına 120px, sağ-soluna %8 iç boşluk verir */
+    display: flex; /* İletişim bilgilerini ve formu yan yana dizmek için esnek kutu modelini aktif eder */
+    justify-content: center; /* Elemanları yatay eksende ortalar */
+    gap: 60px; /* Bilgi alanı ile form kutusu arasına 60px mesafe koyar */
+    flex-wrap: wrap; /* Ekran daraldığında sığmayan elemanların alt satıra geçmesini sağlar */
+}
+
+.contact-left{
+    max-width: 500px; /* Sol taraftaki bilgi alanının maksimum genişliğini 500px ile sınırlar */
+}
+
+.contact-left h2{
+    font-size: 55px; /* Sol taraftaki başlığın yazı boyutunu 55px yapar */
+    margin-bottom: 20px; /* Başlığın altına 20px dış boşluk bırakır */
+}
+
+.contact-left p{
+    line-height: 2; /* Açıklama metninin satır aralığını iki katına çıkararak okunabilirliği artırır */
+}
+
+.contact-form{
+    width: 500px; /* İletişim formunun genişliğini 500px yapar */
+    background: rgba(255, 255, 255, 0.08); /* Form kutusunun arka planına çok hafif, şeffaf beyaz bir renk verir */
+    backdrop-filter: blur(12px); /* Formun arkasında kalan alanı bulanıklaştırarak cam efekti (glassmorphism) oluşturur */
+    padding: 50px; /* Formun içine her taraftan 50px iç boşluk verir */
+    border-radius: 30px; /* Form kutusunun köşelerini 30px yuvarlatır */
+    display: flex; /* Form elemanlarını hizalamak için esnek kutu modelini aktif eder */
+    flex-direction: column; /* Form elemanlarının (input, buton vb.) yukarıdan aşağıya alt alta sıralanmasını sağlar */
+    gap: 20px; /* Form elemanlarının arasına dikeyde 20px mesafe koyar */
+}
+
+.contact-form input {
+    width: 100%; /* Giriş alanlarının form genişliğini tamamen kaplamasını sağlar */
+    padding: 12px; /* Giriş alanlarının içine 12px iç boşluk verir */
+    margin-bottom: 15px; /* Giriş alanlarının altına 15px dış boşluk bırakır */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Etrafına çok ince ve yarı şeffaf beyaz bir çerçeve ekler */
+    border-radius: 6px; /* Giriş alanlarının köşelerini 6px yuvarlatır */
+    outline: none; /* Giriş alanına tıklandığında çıkan varsayılan tarayıcı çerçevesini kaldırır */
+    background: rgba(255, 255, 255, 0.08); /* Şeffaf arka plan */
+    color: white; /* Giriş alanına yazılan yazı rengini beyaz yapar */
+    backdrop-filter: blur(5px); /* Form içi hafif cam efekti */
+}
+
+/* Yazı yazarken placeholder renginin net görünmesi için  */
+.contact-form input::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* Giriş alanlarındaki ipucu metinlerinin (placeholder) rengini yarı şeffaf beyaz yapar */
+}
+.contact-form textarea{
+    height: 170px; /* Mesaj metin alanının yüksekliğini 170px yapar */
+    resize: none; /* Metin alanının sağ alttan el ile büyütülüp formu bozmasını engeller */
+}
+
+.contact-form button{
+    padding: 18px; /* Gönder butonunun içine 18px iç boşluk verir */
+    border: none; /* Butonun varsayılan kenarlıklarını kaldırır */
+    border-radius: 14px; /* Butonun köşelerini 14px yuvarlatır */
+    background: #38bdf8; /* Butonun arka plan rengini açık mavi yapar */
+    color: white; /* Buton içindeki yazının rengini beyaz yapar */
+    cursor: pointer; /* Fareyle butonun üzerine gelindiğinde imlecin el işaretine (tıklanabilir) dönüşmesini sağlar */
+}
+
+/* METEOR ANİMASYONU */
+
+.meteor{
+    position: fixed; /* Meteor çizgilerini ekrana sabitler, sayfa kaysa bile yerleri değişmez */
+    width: 3px; /* Meteor çizgisinin genişliğini 3px yapar */
+    height: 120px; /* Meteor çizgisinin uzunluğunu 120px yapar */
+    background: linear-gradient(transparent, white); /* Meteor çizgisi için dikey renk geçişi */
+    transform: rotate(45deg); /* Çizgileri 45 derece eğerek çapraz düşüş hissi verir */
+    opacity: 0.5; /* Meteorların yarı saydam (%50 görünür) olmasını sağlar */
+    z-index: -1; /* Meteorları tüm sayfa içeriklerinin arkasına yerleştirir */
+}
+
+.meteor1 { top: -100px; left: 20%; animation: meteor 6s linear infinite; } /* 1. meteor hızı ve konumu */
+.meteor2 { top: -100px; left: 60%; animation: meteor 9s linear infinite; } /* 2. meteor hızı ve konumu */
+.meteor3 { top: -100px; left: 85%; animation: meteor 12s linear infinite; } /* 3. meteor hızı ve konumu */
+
+@keyframes meteor{
+    from { transform: translate(0,0) rotate(45deg); } /* Animasyon başlarken meteorun kendi orijinal konumunda ve 45 derece eğik kalmasını sağlar */
+    to { transform: translate(400px,700px) rotate(45deg); } /* Çapraz kayma hareket adımları */
+}
+/* LOADER */
+.loader{
+    position: fixed; /* Yükleme ekranını tüm tarayıcı penceresine sabitler */
+    inset: 0; /* Yükleme ekranının tüm ekranı tamamen kaplamasını sağlar */
+    background: #020617; /* Arka planı çok koyu bir gece mavisi/siyah yapar */
+    display: flex; /* İçindeki logoyu/yazıyı hizalamak için esnek kutu modelini aktif eder */
+    justify-content: center; /* İçindeki logoyu yatay eksende tam ortalar */
+    align-items: center; /* İçindeki logoyu dikey eksende tam ortalar */
+    z-index: 99999; /* Yükleme ekranının sayfadaki her şeyin en üstünde görünmesini sağlar */
+    animation: loaderFade 3s forwards; /* 3 saniye sonra ekranı karartıp gizler */
+}
+
+.loader h1{
+    font-size: 60px; /* Açılış logosunun/yazısının boyutunu 60px yapar */
+    letter-spacing: 10px; /* Harflerin arasına 10px boşluk bırakarak şık bir görünüm verir */
+    animation: pulse 2s infinite; /* Logoyu sürekli büyütüp küçülten nabız animasyonu */
+}
+
+@keyframes loaderFade{
+    0%, 80% { opacity: 1; visibility: visible; } /* İlk %80'lik sürede (yaklaşık 2.4 saniye) ekranın tam görünür kalmasını sağlar */
+    100% { opacity: 0; visibility: hidden; } /* Açılış ekranını tamamen gizleme adımları */
+}
+
+@keyframes pulse{
+    0%, 100% { transform: scale(1); } /* Animasyon başında ve sonunda logonun orijinal boyutunda olmasını sağlar */
+    50% { transform: scale(1.1); } /* Animasyonun ortasında logoyu %10 oranında büyüterek nabız efekti verir */
+}
+/* FLOATING BUTTONS */
+.top-button,
+.whatsapp-button{
+    position: fixed; /* Butonları ekrana sabitler, sayfa kaydırılsa bile yerleri değişmez */
+    bottom: 30px; /* Her iki butonun da ekranın alt kenarından 30px yukarıda durmasını sağlar */
+    width: 60px; /* Butonların genişliğini 60px yapar */
+    height: 60px; /* Butonların yüksekliğini 60px yapar */
+    color: white; /* Buton içindeki ikon veya yazı rengini beyaz yapar */
+    text-decoration: none; /* Buton bir link ise altındaki varsayılan çizgiyi kaldırır */
+    border-radius: 50%; /* Butonları tam bir daire haline getirir */
+    display: flex; /* İkonları hizalamak için esnek kutu modelini aktif eder */
+    justify-content: center; /* İkonu buton içinde yatay eksende tam ortalar */
+    align-items: center; /* İkonu buton içinde dikey eksende tam ortalar */
+    font-size: 28px; /* Buton içindeki ikonların boyutunu 28px yapar */
+    z-index: 999; /* Butonların sayfadaki diğer içeriklerin üstünde kalmasını sağlar */
+    transition: 0.5s; /* Hover (üzerine gelme) efektlerinin 0.5 saniyede yumuşakça gerçekleşmesini sağlar */
+}
+
+.top-button{
+    right: 30px; /* Yukarı çık butonunu ekranın sağ kenarından 30px içeriye yerleştirir */
+    background: #38bdf8; /* Yukarı çık butonunun arka plan rengini açık mavi yapar */
+}
+
+.top-button:hover{
+    transform: translateY(-8px); /* Üzerine gelindiğinde butonu hafifçe 8px yukarı kaydırır */
+    background: #f59e0b; /* Üzerine gelindiğinde arka plan rengini turuncu yapar */
+}
+
+.whatsapp-button{
+    left: 30px; /* WhatsApp butonunu ekranın sol kenarından 30px içeriye yerleştirir */
+    background: #22c55e; /* WhatsApp yeşil rengi */
+}
+
+.whatsapp-button:hover{
+    transform: scale(1.1); /* Üzerine gelindiğinde butonu %10 oranında büyüterek dikkat çeker */
+}
+/* FOOTER */
+footer{
+    background: #01040f; /* Alt bilgi (footer) alanının arka planını çok koyu bir siyah/lacivert yapar */
+    padding: 35px; /* Alt bilgi alanının içine her taraftan 35px iç boşluk verir */
+    text-align: center; /* Alt bilgi alanı içindeki tüm metinleri ortalar */
+}
+/* HAMBURGER & TOGGLE */
+#menu-toggle{
+    display: none; /* Görünmez olan menü tetikleyici checkbox */
+}
+
+.hamburger{
+    display: none; /* Hamburger menü ikonunu (mobil menü açma butonu) başlangıçta/masaüstünde gizler */
+    font-size: 30px; /* Hamburger ikonunun boyutunu 30px yapar */
+    cursor: pointer; /* Fareyle üzerine gelindiğinde imlecin el işaretine dönüşmesini sağlar */
+}
+/* RESPONSIVE (MEDIA QUERIES) */
+@media(max-width: 768px){ /* Ekran genişliği 768px veya daha küçük olduğunda (tablet ve mobil) aşağıdaki kuralları uygular */
+
+ .hamburger{
+        display: block; /* Hamburger menü butonunu sadece mobilde görünür yapar */
+ }
+
+ .menu{
+position: absolute; /* Menüyü sayfa akışından çıkararak navbarın altına bağımsızca konumlandırır */
+top: 90px; /* Menünün üst kısımdan navbar yüksekliği kadar (90px) aşağıda başlamasını sağlar */
+left: 0; /* Menüyü ekranın sol kenarına sıfırlar */
+width: 100%; /* Menünün ekran genişliğini tamamen kaplamasını sağlar */
+background: #020617; /* Menü arka planını koyu lacivert yapar */
+flex-direction: column; /* Menü linklerini dikeyde üst üste dizer */
+text-align: center; /* Menü içindeki link metinlerini ortalar */
+max-height: 0; /* Açılmadan önce yüksekliği sıfır olarak gizler */
+overflow: hidden; /* Yüksekliği 0 iken menü linklerinin dışarı taşmasını ve görünmesini engeller */
+transition: 0.5s; /* Menünün açılıp kapanma hareketinin 0.5 saniyede yumuşakça gerçekleşmesini sağlar */
+    }
+
+    #menu-toggle:checked ~ .menu{
+        max-height: 500px; /* Checkbox seçildiğinde dikey menüyü aşağı doğru açar */
+        padding: 20px 0; /* Menü açıldığında üstten ve alttan 20px iç boşluk bırakır */
+    }
+
+    .hero-title{ font-size: 48px; } /* Mobilde başlık boyutunu küçültür */
+    .hero-text{ font-size: 18px; } /* Mobilde hero açıklama metninin boyutunu 18px'e düşürür */
+    .parallax-content h2{ font-size: 38px; } /* Mobilde paralaks başlığının boyutunu 38px'e düşürür */
+    .contact-left h2{ font-size: 40px; } /* Mobilde iletişim alanı başlığının boyutunu 40px'e düşürür */
+
+    .contact-form,
+    .stat-box,
+    .testimonial-card{
+        width: 100%; /* Sığmayan yan yana kutuları tam genişlik yapıp alt alta dizer */
+    }
+
+    .contact-form{
+        padding: 35px; /* Mobilde form kutusunun iç boşluğunu 35px'e düşürerek ekrana sığdırır */
+    }
+
+    .timeline::before,
+    .timeline-dot{
+        left: 20px; /* Zaman çizelgesinin dikey çizgisini sol kenara yanaştırır */
+    }
+
+    .timeline-content{
+        width: 85%; /* Mobilde içerik kutularının ekranın %85'ini kaplamasını sağlar */
+        left: 50px !important; /* Tüm tarih içeriklerini çizginin sağına dizer */
+    }
+
+}

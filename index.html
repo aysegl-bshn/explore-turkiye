@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Türkiye</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- CLOUDS -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+
+    <!-- METEORS -->
+    <div class="meteor meteor1"></div>
+    <div class="meteor meteor2"></div>
+    <div class="meteor meteor3"></div>
+
+    <!-- LOADER -->
+    <div class="loader">
+        <h1>EXPLORE TÜRKİYE</h1>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">Explore Türkiye</div>
+            
+            <!-- HAMBURGER -->
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="hamburger">☰</label>
+
+            <!-- MENU -->
+            <ul class="menu">
+                <li><a href="#home">Ana Sayfa</a></li>
+               <li class="dropdown">
+    <a href="#">Şehirler</a>
+    <ul class="dropdown-menu">
+        <li><a href="#kapadokya">Nevşehir</a></li>
+        <li><a href="#pamukkale">Denizli</a></li>
+        <li><a href="#antalya">Antalya</a></li>
+    </ul>
+</li>
+                <li><a href="#gallery">Galeri</a></li>
+                <li><a href="#tours">Turlar</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title smoke-text">EXPLORE TÜRKİYE</h1>
+            <p class="hero-text">Türkiye'nin tarihi, doğası ve eşsiz manzaralarını keşfet.</p>
+            <div class="hero-buttons">
+                <a href="#cards" class="btn">Şehirleri Keşfet</a>
+                <a href="#tours" class="btn btn2">Turları İncele</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <div class="feature-box">
+            <div class="feature-icon">✈</div>
+            <h3>Hızlı Rezervasyon</h3>
+            <p>Dakikalar içinde rezervasyon yap ve tatiline başla.</p>
+        </div>
+        <div class="feature-box">
+            <div class="feature-icon">★</div>
+            <h3>Premium Deneyim</h3>
+            <p>Türkiye'nin en kaliteli tatil rotalarını keşfet.</p>
+        </div>
+        <div class="feature-box">
+            <div class="feature-icon">☁</div>
+            <h3>Doğa ve Tarih</h3>
+            <p>Doğal güzellikler ve tarihi mekanlar seni bekliyor.</p>
+        </div>
+    </section>
+
+    <!-- PARALLAX -->
+    <section class="parallax">
+        <div class="parallax-content">
+            <h2>Hayalindeki Yolculuğa Başla</h2>
+            <p>Türkiye'nin büyüleyici atmosferini yaşamaya hazır mısın?</p>
+        </div>
+    </section>
+
+    <!-- DESTINATIONS -->
+    <section class="cards-section" id="cards">
+        <h2 class="section-title">Popüler Destinasyonlar</h2>
+        <div class="card-container">
+            
+            <!-- CARD 1: KAPADOKYA -->
+            <article class="card" id="kapadokya">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src= "assets/Kapadokya.jpg" alt="Kapadokya Balonları" class="card-img">
+                        <div class="card-title">Kapadokya</div>
+                    </div>
+                    <div class="card-back">
+                        <h3>Kapadokya</h3>
+                        <p>Gün doğumu balon turları ve eşsiz peri bacaları.</p>
+                        <a href="#tur-plani" class="card-btn">İncele</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- CARD 2: ANTALYA -->
+            <article class="card" id="antalya">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src= "assets/Antalya.jpg" alt="Antalya Sahili" class="card-img">
+                        <div class="card-title">Antalya</div>
+                    </div>
+                    <div class="card-back">
+                        <h3>Antalya</h3>
+                        <p>Akdeniz'in masmavi sahilleri ve lüks tatil deneyimi.</p>
+                        <a href="#" class="card-btn">İncele</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- CARD 3: PAMUKKALE -->
+            <article class="card" id="pamukkale">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="assets/Pamukkale.jpg" alt="Pamukkale Travertenleri" class="card-img">
+                        <div class="card-title">Pamukkale</div>
+                    </div>
+                    <div class="card-back">
+                        <h3>Pamukkale</h3>
+                        <p>Travertenleriyle dünyaca ünlü doğa harikası.</p>
+                        <a href="#" class="card-btn">İncele</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Türkiye Galerisi</h2>
+        <div class="gallery-container">
+            <div class="gallery-box">
+                <img src="assets/İstanbul.jpg" alt="İstanbul">
+                <div class="gallery-overlay">İstanbul</div>
+            </div>
+            <div class="gallery-box">
+                <img src="assets/Trabzon.jpg" alt="Trabzon">
+                <div class="gallery-overlay">Trabzon</div>
+            </div>
+            <div class="gallery-box">
+                <img src="assets/Mardin.jpg" alt="Mardin">
+                <div class="gallery-overlay">Mardin</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOUR SECTION -->
+    <section class="tour-section" id="tours">
+        <h2 class="section-title">Tur Paketleri</h2>
+        <div class="tour-container">
+            <article class="tour-card">
+                <div class="tour-top">POPÜLER</div>
+                <h3>Kapadokya Turu</h3>
+                <p>3 Günlük Balon Turu</p>
+                <span>₺8.500</span>
+                <a href="#" class="tour-btn">Rezervasyon</a>
+            </article>
+
+            <article class="tour-card">
+                <div class="tour-top">YAZ FIRSATI</div>
+                <h3>Akdeniz Turu</h3>
+                <p>5 Günlük Deniz Tatili</p>
+                <span>₺14.000</span>
+                <a href="#" class="tour-btn">Rezervasyon</a>
+            </article>
+
+            <article class="tour-card">
+                <div class="tour-top">DOĞA</div>
+                <h3>Karadeniz Turu</h3>
+                <p>4 Günlük Yayla Gezisi</p>
+                <span>₺11.000</span>
+                <a href="#" class="tour-btn">Rezervasyon</a>
+            </article>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="stats-section">
+        <div class="stat-box">
+            <h2>81+</h2>
+            <p>Şehir</p>
+        </div>
+        <div class="stat-box">
+            <h2>500+</h2>
+            <p>Tur Noktası</p>
+        </div>
+        <div class="stat-box">
+            <h2>1M+</h2>
+            <p>Ziyaretçi</p>
+        </div>
+        <div class="stat-box">
+            <h2>7/24</h2>
+            <p>Canlı Destek</p>
+        </div>
+    </section>
+
+    <!-- SVG WAVE -->
+    <div class="wave">
+        <svg viewBox="0 0 1440 320">
+            <path fill="#0f172a" fill-opacity="1" d="M0,192L48,202.7C96,213,192,235,288,245.3C384,256,480,256,576,234.7C672,213,768,171,864,176C960,181,1056,235,1152,240C1248,245,1344,203,1392,181.3L1440,160L1440,320L0,320Z"></path>
+        </svg>
+    </div>
+
+    <!-- TIMELINE -->
+    <section class="timeline-section" id="tur-plani">
+        <h2 class="section-title">Tur Planı</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>1.Gün</h3>
+                    <p>Kapadokya balon turu ve gün doğumu etkinlikliği.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>2.Gün</h3>
+                    <p>Vadiler ve tarihi mağara gezileri.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>3.Gün</h3>
+                    <p>Yeraltı şehirleri ve yöresel lezzetler.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonial-section">
+        <h2 class="section-title">Ziyaretçi Yorumları</h2>
+        <div class="testimonial-container">
+            <div class="testimonial-card">
+                <p>“Hayatımın en güzel tatil deneyimiydi.”</p>
+                <h4>Ayşe K.</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>“Organizasyon ve oteller mükemmeldi.”</p>
+                <h4>Mehmet T.</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>“Kesinlikle tekrar katılacağım.”</p>
+                <h4>Elif Y.</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+        <div class="contact-left">
+            <h2>Bizimle İletişime Geç</h2>
+            <p>Hayalindeki tatil için bizimle iletişime geçebilirsin.</p>
+        </div>
+       <form class="contact-form">
+    <h3>Kullanıcı Girişi</h3>
+    <input type="text" placeholder="Kullanıcı Adı veya E-posta" required>
+    <input type="password" placeholder="Şifre" required>
+    <button type="submit">Giriş Yap</button>
+</form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Explore Türkiye | Tüm Hakları Saklıdır</p>
+    </footer>
+
+    <!-- FLOATING BUTTONS -->
+    <a href="#home" class="top-button">↑</a>
+    <a href="#contact" class="whatsapp-button">✆</a>
+
+</body>
+</html>
